@@ -1,0 +1,28 @@
+{
+    "linux_template": {
+      "name": "Configure RHEL EC2",
+      "description": "Post-provision configuration for Linux host",
+      "job_type": "run",
+      "inventory": "Terraform Inventory",
+      "project": "Terraform-Ansible-Demo",
+      "playbook": "playbooks/linux.yml",
+      "credentials": ["AWS Access", "SSH Key"],
+      "verbosity": 2,
+      "limit": "linux",
+      "scm_branch": "main"
+    },
+    "windows_template": {
+      "name": "Configure Windows EC2",
+      "description": "Post-provision configuration for Windows host",
+      "job_type": "run",
+      "inventory": "Terraform Inventory",
+      "project": "Terraform-Ansible-Demo",
+      "playbook": "playbooks/windows.yml",
+      "credentials": ["AWS Access", "Windows Admin"],
+      "verbosity": 2,
+      "limit": "windows",
+      "scm_branch": "main"
+    }
+  }
+  
+  

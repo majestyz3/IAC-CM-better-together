@@ -1,0 +1,30 @@
+---
+- name: Post-deploy config for RHEL EC2
+  hosts: all
+  become: true
+  tasks:
+    - name: Install additional packages
+      yum:
+        name:
+          - htop
+          - unzip
+          - python3
+        state: present
+
+    - name: Ensure firewalld is started and enabled
+      service:
+        name: firewalld
+        state: started
+        enabled: true
+
+    - name: Create an admin user
+      user:
+        name: devops
+        groups: wheel
+        state: present
+        shell: /bin/bash
+
+    - name: Set authorized key for devops user
+      authorized_key:
+        user: devops
+        key: "{{ lookup('file', 'files/devops_id_rsa.pub') }}"

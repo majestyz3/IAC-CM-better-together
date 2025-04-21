@@ -1,0 +1,27 @@
+---
+- name: Packer Ansible Provisioning for RHEL
+  hosts: all
+  become: true
+  tasks:
+    - name: Install basic packages
+      yum:
+        name:
+          - vim
+          - curl
+          - git
+          - wget
+        state: present
+
+    - name: Enable and start SSH service
+      service:
+        name: sshd
+        state: started
+        enabled: true
+
+    - name: Clean Yum cache
+      command: yum clean all
+
+    - name: Create a banner file
+      copy:
+        dest: /etc/motd
+        content: "Welcome to your RHEL image built with Packer and Ansible."

@@ -1,0 +1,26 @@
+---
+- name: Post-deploy config for Windows EC2
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Install 7zip via Chocolatey
+      win_chocolatey:
+        name: 7zip
+        state: present
+
+    - name: Create new local user
+      win_user:
+        name: devops
+        password: "{{ vault_windows_password }}"
+        groups:
+          - Administrators
+        state: present
+
+    - name: Enable WinRM
+      win_feature:
+        name: WinRM-IIS-Ext
+        state: present
+
+    - name: Set timezone to UTC
+      win_timezone:
+        timezone: UTC

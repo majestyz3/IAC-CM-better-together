@@ -1,0 +1,19 @@
+plugin: constructed
+strict: false
+
+inventory:
+  plugin: terraform
+  path: ../IAC/terraform.tfstate.json
+
+  compose:
+    ansible_host: public_ip
+
+  groups:
+    linux:
+      filters:
+        tags.Role: "Ansible-Managed"
+    windows:
+      filters:
+        tags.Role: "OpenShift-Windows"
+
+  strict: false
