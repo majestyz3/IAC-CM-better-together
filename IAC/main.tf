@@ -1,3 +1,4 @@
+#testing change
 # Root Terraform configuration for deploying infrastructure
 # This includes a RHEL Linux EC2 instance and an OpenShift cluster for Windows VM
 # Secrets pulled from HCP Vault, AMIs pulled from HCP Packer
